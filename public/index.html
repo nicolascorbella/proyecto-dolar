@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta del Dólar</title>
+</head>
+<body>
+  <h1>Cotización del Dólar</h1>
+  <div id="cotizacion"></div>
+
+  <script>
+    fetch('/api/dolar')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('cotizacion').innerHTML = `
+          <p>Dólar Oficial: ${data.oficial.value_buy} / ${data.oficial.value_sell}</p>
+          <p>Dólar Blue: ${data.blue.value_buy} / ${data.blue.value_sell}</p>
+          <p>Dólar Cripto: ${data['cripto'].value_buy} / ${data['cripto'].value_sell}</p>
+          <!-- Añade más valores según lo necesites -->
+        `;
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
+</body>
+</html>
